@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,5 +24,14 @@ public class HelloController {
        String name = request.getParameter("name");
        String responBody  = helloService.hello(name);
        response.getWriter().println(responBody);
+    }
+
+    @PostMapping(path = "halo")
+    public void helloServicePostMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String name = firstName + " " + lastName;
+        String responBody = helloService.hello(name);
+        response.getWriter().println(responBody);
     }
 }
