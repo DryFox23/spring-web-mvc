@@ -39,4 +39,10 @@ public class HelloControllerMockTest {
 
         Assertions.assertFalse("Hello Bernad!".equals(helloService.hello("Bernad")));
     }
+
+    @Test
+    void helloServicePostMethod() throws Exception {
+        mockMvc.perform(post("/hello").queryParam("name", "Bernad")).andExpectAll(status()
+                .isMethodNotAllowed());
+    }
 }
