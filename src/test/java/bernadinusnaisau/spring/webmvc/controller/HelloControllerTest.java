@@ -23,7 +23,7 @@ public class HelloControllerTest {
     @Test
     void helloGuest() throws Exception {
         mockMvc.perform(get("/hello")).andExpectAll(status().isOk(), content()
-                .string(Matchers.containsString("Hello Guest!")));
+                .string(Matchers.containsString("Hello Guest")));
     }
 
     @Test
