@@ -5,10 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -20,8 +17,7 @@ public class HelloController {
     private HelloService helloService;
 
     @GetMapping(path = "/hello")
-    public void helloController(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       String name = request.getParameter("name");
+    public void helloController(@RequestParam(name = "name", required = false) String name , HttpServletResponse response) throws IOException {
        String responBody  = helloService.hello(name);
        response.getWriter().println(responBody);
     }
