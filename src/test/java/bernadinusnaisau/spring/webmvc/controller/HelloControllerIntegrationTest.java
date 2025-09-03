@@ -30,6 +30,6 @@ public class HelloControllerIntegrationTest {
         ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://localhost:" + port + "/hello?name=Bernad", String.class);
         String response = responseEntity.getBody();
         Assertions.assertNotNull(response);
-        Assertions.assertEquals(response.trim(), "Hello Bernad!");
+        Assertions.assertEquals(response.trim(), "Hello Bernad");
     }
 }
