@@ -29,4 +29,17 @@ public class FromControllerTest {
                         header().string(HttpHeaders.CONTENT_TYPE, Matchers.containsString(MediaType.TEXT_HTML_VALUE)),
                         (content().string(Matchers.containsString("Hello Bernad"))));
     }
+
+    @Test
+    void createPerson() throws Exception {
+        mockMvc.perform(post("/form/person").contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("name", "Bernad")
+                .param("birthDate", "2003-08-23")
+                .param("address", "JLGG"))
+                .andExpectAll(status().isOk(), content()
+                .string(Matchers.containsString(
+                        "Sucess Create Person With Name: Bernad"
+                        + "Birth Date: 2003-08-23"
+                        + "Address: JLGG")));
+    }
 }
