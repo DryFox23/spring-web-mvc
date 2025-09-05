@@ -1,5 +1,6 @@
 package bernadinusnaisau.spring.webmvc.controller;
 
+import jakarta.servlet.http.Cookie;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,8 @@ public class AuthControllerTest {
                 .param("name", "admin")
                 .param("password", "rahasia"))
                 .andExpectAll(status().isOk(), content()
-                        .string(Matchers.containsString("Welcome Admin!")));
+                        .string(Matchers.containsString("Welcome Admin!")),
+                        cookie().value("name", "admin"));
     }
 
     @Test
@@ -37,5 +39,13 @@ public class AuthControllerTest {
                 .param("password", "gagal"))
                 .andExpectAll(status().isUnauthorized(), content()
                         .string(Matchers.containsString("Invalid Credentials")));
+    }
+
+    @Test
+    void GetUser() throws Exception {
+        mockMvc.perform(get("/atuh/user")
+                .cookie(new Cookie("name", "admin")))
+                .andExpectAll(status().isOk(),
+                        content().string(Matchers.containsString("Welcome Admin!")));
     }
 }
