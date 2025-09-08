@@ -1,6 +1,7 @@
 package bernadinusnaisau.spring.webmvc.controller;
 
 import bernadinusnaisau.spring.webmvc.model.CreatePersonRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ public class PersonApiController {
     consumes = MediaType.APPLICATION_JSON_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public CreatePersonRequest createPerson(@RequestBody CreatePersonRequest request) {
+    public CreatePersonRequest createPerson(@RequestBody @Valid CreatePersonRequest request) {
         return request;
     }
 }
