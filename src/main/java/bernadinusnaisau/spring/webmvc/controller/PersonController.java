@@ -12,15 +12,20 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class PersonController {
 
-    @PostMapping(path = "/person", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
-    public String createPerson(@ModelAttribute CreatePersonRequest request) {
-        return new StringBuilder().append("Succesfully Create Person ")
-                .append(request.getFirstName()).append(" ")
-                .append(request.getLastName()).append(" ")
-                .append(" with email ").append(request.getEmail())
-                .append(" and phone number ").append(request.getPhoneNumber())
-                .toString();
-    }
+        @PostMapping(path = "/person", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+        @ResponseBody
+        @ResponseStatus(HttpStatus.OK)
+        public String createPerson(@ModelAttribute CreatePersonRequest request) {
+            return new StringBuilder()
+                    .append("Succesfully Create Person ")
+                    .append(request.getFirstName()).append(" ")
+                    .append(request.getLastName()).append(" ")
+                    .append(" with email ").append(request.getEmail())
+                    .append(" and phone number ").append(request.getPhoneNumber())
+                    .append(" with address ")
+                    .append(request.getAddress().getStreet())
+                    .append(request.getAddress().getCity())
+                    .append(request.getAddress().getState())
+                    .toString();
+        }
 }
