@@ -16,6 +16,7 @@ public class PersonController {
         @ResponseBody
         @ResponseStatus(HttpStatus.OK)
         public String createPerson(@ModelAttribute CreatePersonRequest request) {
+                System.out.println(request);
             return new StringBuilder()
                     .append("Succesfully Create Person ")
                     .append(request.getFirstName()).append(" ")
