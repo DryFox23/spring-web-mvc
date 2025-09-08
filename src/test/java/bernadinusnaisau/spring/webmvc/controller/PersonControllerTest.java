@@ -26,11 +26,14 @@ public class PersonControllerTest {
                         .param("firstName", "Bernadinus")
                         .param("lastName", "Naisau")
                         .param("email", "bernad@example.com")
-                        .param("phoneNumber", "021"))
+                        .param("phoneNumber", "021")
+                        .param("address.street", "street123")
+                        .param("address.city", "city123")
+                        .param("address.state", "state123"))
                 .andExpectAll(
                         status().isOk(),
                         content().string(Matchers.containsString("Succesfully Create Person Bernadinus" +
-                                " Naisau " + " with email bernad@example.com" + " and phone number 021")
+                                " Naisau " + " with email bernad@example.com" + " and phone number 021 " + "with address " + "street123" +"city123" + "state123")
                         ));
     }
 
