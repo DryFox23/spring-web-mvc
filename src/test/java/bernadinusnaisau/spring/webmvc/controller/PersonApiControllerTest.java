@@ -42,4 +42,19 @@ public class PersonApiControllerTest {
                 .content(objectMapper.writeValueAsString(request)))
                 .andExpectAll(status().isOk(), content().json(objectMapper.writeValueAsString(request)));
     }
+
+    @Test
+    void apiPersonJsonNotValid() throws Exception {
+
+        CreatePersonRequest request = new CreatePersonRequest();
+        request.setHobbies(List.of("Coding", "Reading"));
+        request.setSosialMedias(new ArrayList<>());
+        request.getSosialMedias().add(new SocialMediaRequest("Facbook", "Facbook.com/gaming123"));
+
+        mockMvc.perform(post("/api/person")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpectAll(status().isBadRequest());
+    }
 }
