@@ -29,7 +29,13 @@ public class PersonControllerTest {
                         .param("phoneNumber", "021")
                         .param("address.street", "street123")
                         .param("address.city", "city123")
-                        .param("address.state", "state123"))
+                        .param("address.state", "state123")
+                        .param("hobbies[0],", "hobbies1")
+                        .param("hobbies[1],", "hobbies2")
+                        .param("sosialMedias.socialMedia[0]", "socialMedia1")
+                        .param("sosialMedias.urlSocialMedia[0]", "urlSocialMedia1")
+                        .param("sosialMedias.socialMedia[1]", "socialMedia2")
+                        .param("sosialMedias.urlSocialMedia[01", "urlSocialMedia2"))
                 .andExpectAll(
                         status().isOk(),
                         content().string(Matchers.containsString("Succesfully Create Person Bernadinus" +
