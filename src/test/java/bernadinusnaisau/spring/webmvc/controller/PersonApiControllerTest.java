@@ -4,6 +4,7 @@ import bernadinusnaisau.spring.webmvc.model.CreatePersonRequest;
 import bernadinusnaisau.spring.webmvc.model.SocialMediaRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -55,6 +56,6 @@ public class PersonApiControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpectAll(status().isBadRequest());
+                .andExpectAll(status().isBadRequest(), content().string(Matchers.containsString("Method Not Valid Exeception :")));
     }
 }
