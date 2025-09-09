@@ -1,8 +1,11 @@
 package bernadinusnaisau.spring.webmvc.controller;
 
+import bernadinusnaisau.spring.webmvc.model.User;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +22,12 @@ public class AuthController {
     public ResponseEntity<String> login(
             @RequestParam(name = "name") String name,
             @RequestParam(name = "password") String password,
-            HttpServletResponse response) throws Exception {
+            HttpServletResponse response, HttpServletRequest request) throws Exception {
 
         if (name.equals("admin") && password.equals("rahasia")) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("user", new User(name));
+
             Cookie cookie = new Cookie("name", name);
             cookie.setPath("/");
             response.addCookie(cookie);
