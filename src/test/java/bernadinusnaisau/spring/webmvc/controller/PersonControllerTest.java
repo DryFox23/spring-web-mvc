@@ -47,19 +47,22 @@ public class PersonControllerTest {
     void createPersonNotValid() throws Exception {
         mockMvc.perform(post("/person")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-//                .param("firstName", "Bernadinus")
-                .param("lastName", "Naisau")
-                .param("email", "bernad@example.com")
-                .param("phoneNumber", "021")
-                .param("address.street", "street123")
-                .param("address.city", "city123")
-                .param("address.state", "state123")
-                .param("hobbies[0],", "hobbies1")
-                .param("hobbies[1],", "hobbies2")
-                .param("sosialMedias.socialMedia[0]", "socialMedia1")
-                .param("sosialMedias.urlSocialMedia[0]", "urlSocialMedia1")
-                .param("sosialMedias.socialMedia[1]", "socialMedia2")
-                .param("sosialMedias.urlSocialMedia[01", "urlSocialMedia2"))
-                .andExpectAll(status().isBadRequest());
+//                  .param("firstName", "Bernadinus")
+                        .param("lastName", "Naisau")
+                        .param("email", "bernad@example.com")
+                        .param("phoneNumber", "021")
+                        .param("address.street", "street123")
+                        .param("address.city", "city123")
+                        .param("address.state", "state123")
+                        .param("hobbies[0]", "hobbies1")
+                        .param("hobbies[1]", "hobbies2")
+                        .param("sosialMedias.socialMedia[0]", "socialMedia1")
+                        .param("sosialMedias.urlSocialMedia[0]", "urlSocialMedia1")
+                        .param("sosialMedias.socialMedia[1]", "socialMedia2")
+                        .param("sosialMedias.urlSocialMedia[1]", "urlSocialMedia2"))
+                .andExpectAll(
+                        status().isBadRequest(),
+                        content().string(Matchers.containsString("You Send Invalid Data"))
+                );
     }
 }
