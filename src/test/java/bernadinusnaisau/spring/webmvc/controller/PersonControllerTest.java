@@ -49,7 +49,7 @@ public class PersonControllerTest {
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 //                  .param("firstName", "Bernadinus")
                         .param("lastName", "Naisau")
-                        .param("email", "bernad@example.com")
+//                        .param("email", "bernad@example.com")
                         .param("phoneNumber", "021")
                         .param("address.street", "street123")
                         .param("address.city", "city123")
@@ -62,7 +62,7 @@ public class PersonControllerTest {
                         .param("sosialMedias.urlSocialMedia[1]", "urlSocialMedia2"))
                 .andExpectAll(
                         status().isBadRequest(),
-                        content().string(Matchers.containsString("You Send Invalid Data"))
+                        content().string(Matchers.containsString("error count:"))
                 );
     }
 }
