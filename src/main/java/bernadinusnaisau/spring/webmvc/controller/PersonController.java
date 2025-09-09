@@ -23,13 +23,16 @@ public class PersonController {
         @ResponseStatus(HttpStatus.OK)
         public ResponseEntity<String> createPerson(@ModelAttribute @Valid CreatePersonRequest request,
                                    BindingResult bindingResult) {
-
-                List<FieldError> allErrors = bindingResult.getFieldErrors();
-                if (!allErrors.isEmpty()) {
-                        allErrors.forEach(fieldError -> {
-                                System.out.println(fieldError.getField() + ": " + fieldError.getDefaultMessage());
-                        });
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You Send Invalid Data");
+//                Ambil total error count pada fieldnya
+                int errorCount = bindingResult.getFieldErrorCount();
+                if (errorCount > 0) {
+                        System.out.println("error count: " + errorCount);
+//                        Ambil keterangan error dari fieldnya
+                        List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+                        for (FieldError fieldError : fieldErrors) {
+                                System.out.println(fieldError.getField() + ": " + fieldError.getDefaultMessage() + " " + fieldError.getRejectedValue());
+                        }
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error count: " + errorCount);
                 }
 
                 System.out.println(request);
