@@ -26,4 +26,10 @@ public class UserControllerTest {
                 .andExpectAll(status().isOk(),
                         content().string(Matchers.containsString("Hello :admin")));
     }
+
+    @Test
+    void getUserInValid() throws Exception {
+        mockMvc.perform(get("/user/current"))
+                .andExpectAll(status().is3xxRedirection());
+    }
 }
