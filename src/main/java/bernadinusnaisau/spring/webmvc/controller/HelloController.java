@@ -6,8 +6,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Objects;
 
 @Controller
@@ -29,5 +31,13 @@ public class HelloController {
         String name = firstName + " " + lastName;
         String responBody = helloService.hello(name);
         response.getWriter().println(responBody);
+    }
+
+    @GetMapping(path = "/web/hello")
+    public ModelAndView hello(@RequestParam(name = "name", required = false)String name){
+        return new ModelAndView("hello", Map.of(
+                "title", "Hello Page",
+                "name", name
+        ));
     }
 }
